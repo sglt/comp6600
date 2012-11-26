@@ -160,3 +160,5 @@ class Alpha_Beta:
             print 'The square you input doesnt have any squares'
             return False
 
+    def re_construct_pebble(self, current_list):
+        self.RotateList = current_list

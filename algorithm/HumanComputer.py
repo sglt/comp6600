@@ -2,20 +2,18 @@ import pdb
 import sys
 from utils import Move, JustifyOver, printPebble
 from techniques import Alpha_Beta
+from nextstep import computer_next_step,Human_next_step
 #!/usr/bin/python
 
 
-if __name__ == '__main__':
+def algorithm(input_n, d, currentlist):
+    
     input_n = 3
     d = 5
-    game =Alpha_Beta(input_n,d)
 
     while input_n >= 2:
 
-        action_a = game.Search('A');
-        if(action_a <0): print 'it can not get any actions'
-        print 'action_a = ', action_a
-        game.change(action_a);
+        computer_next_step(input_n,d,input_n)
 
         print '-------------------Now it is B turn'
         printPebble(game.RotateList)
