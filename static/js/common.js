@@ -8,7 +8,7 @@ function generateTable(firstRowElements, secondRowElements, firstRowEnabled, sec
     
     var secondRow = $('<div class="btn-group"></div>');
     for (i in secondRowElements) {
-        secondRow.append($("<div class='btn btn-inverse'" + (secondRowEnabled ? "" : " disabled") + ">" + secondRowElements[i] + "</div>"));
+        secondRow.append($("<div class='btn btn-danger'" + (secondRowEnabled ? "" : " disabled") + ">" + secondRowElements[i] + "</div>"));
     }
     
     var table = $('<div></div>');
@@ -19,18 +19,21 @@ function generateTable(firstRowElements, secondRowElements, firstRowEnabled, sec
     return table;
 }
 
-function generateBlock(table, title, styleclass) {
+function generateBlock(table, title, stylename) {
     var html = $('<div></div>');
-    html.append($('<div class="block_title"><span class="label ' + styleclass + '">' + title + '</span></div>'));
+    html.append($('<div class="block_title"><span class="badge badge-' + stylename + '">' + title + '</span></div>'));
     html.append(table);
     return html;
 }
-var ee;
+
+function select(target) {
+    $(target).removeClass("btn-primary btn-danger").addClass("btn-inverse");
+}
+
 $(document).ready(function(){
     $('#btngroup_choosesize > .btn').click(function(e) {
         $('#modal_choosesize').modal("hide");
         init(parseInt(e.currentTarget.innerText));
-        ee=e;
     });
     $('#modal_choosesize').modal({backdrop: 'static', keyboard: false});
 });

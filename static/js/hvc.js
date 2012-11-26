@@ -8,13 +8,13 @@ function init(size) {
     }
     var table = generateTable(first, second, true, false)
     table.children().first().find(".btn").click(table_click_handler(first, second));
-    $('#battle_field').append(generateBlock(table, "Human", "label-info"));
+    $('#battle_field').append(generateBlock(table, "Human", "info"));
 }
 
 function table_click_handler() {
     return function(e) {
         select($(e.currentTarget));
-        $(e.currentTarget).siblings('.btn').off().attr("disabled", true);
+        $(e.currentTarget).parent().children('.btn').off().attr("disabled", true);
         $.ajax("/ajax/hvcnext", {
             type: "post",
             data: JSON.stringify(move($(e.currentTarget).index())),
@@ -37,17 +37,14 @@ function move(selectedIndex) {
     return [first, second]
 }
 
-function select(target) {
-    $(target).removeClass("btn-primary btn-inverse").addClass("btn-warning");
-}
 
 function next_handler(response) {
     var tableComputer = generateTable(first, second, false, false);
     select(tableComputer.children().last().find(".btn")[response.selected_index])
-    $('#battle_field').prepend(generateBlock(tableComputer, "Computer", "label-important"));
+    $('#battle_field').prepend(generateBlock(tableComputer, "Computer", "important"));
     first = response.current[0];
     second = response.current[1];
     var tableHuman = generateTable(first, second, true, false);
     tableHuman.children().first().find(".btn").click(table_click_handler(first, second));
-    $('#battle_field').prepend(generateBlock(tableHuman, "Human", "label-info"));
+    $('#battle_field').prepend(generateBlock(tableHuman, "Human", "info"));
 }
