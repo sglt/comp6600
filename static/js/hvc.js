@@ -14,9 +14,10 @@ function init(size) {
 function table_click_handler() {
     return function(e) {
         select($(e.currentTarget));
+        $(e.currentTarget).siblings('.btn').off().attr("disabled", true);
         $.ajax("/ajax/hvcnext", {
             type: "post",
-            data: JSON.stringify(move(first, second, $(e.currentTarget).index())),
+            data: JSON.stringify(move($(e.currentTarget).index())),
             contentType:"application/json; charset=utf-8",
             dataType:"json",
             success: next_handler,
