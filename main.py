@@ -2,12 +2,12 @@ import os
 import tornado.ioloop
 import tornado.web
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
+import ajax
 
 application = tornado.web.Application([
-    (r"/", MainHandler),
+    (r"/", tornado.web.RedirectHandler, {"url": "/static/index.html"}),
+    (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "static"}),
+    (r"/ajax/hvcnext", ajax.HVCNextHandler),
 ])
 
 if __name__ == "__main__":

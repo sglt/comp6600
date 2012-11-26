@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+        
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container" style="margin-top: 128px;">
+            <h1>COMP6600 Artificial Intelligence Final Project</h1>
+            <h4>
+                by <a href="http://auburn.edu/~lzt0006/">Liang Tang</a> and <a href="http://auburn.edu/~szg0031/">Song Gao</a> <br/>
+                Computer Science and Software Engineering, Auburn University
+                <a href="#modal_rules" role="button" class="btn btn-info pull-right" data-toggle="modal">Game Rules</a>
+            </h4>
+            
+            <div class="row" style="margin-top: 64px;">
+                <div class="span8 offset2">
+                    <div class="btn-group">
+                        <a class="btn btn-large btn-primary" href="/static/hvc.html">Human V.S. Computer</a>
+                        <a class="btn btn-large btn-inverse" href="/static/cvc.html">Computer V.S. Computer</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="modal hide fade" id="modal_rules" role="dialog" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Game Rules</h3>
+                </div>
+                <div class="modal-body">
+                    Consider the following two player game. Each player gets a row of n squares with n pebbles in each. A move by a player involves picking up all pebbles in one of his squares and distributing them clockwise by dropping one pebble into each square starting with the next square in the clockwise direction (pebbles are dropped into his and opponent's squares) until all pebbles have been dropped. A player has to make a move if he has at least one non-empty square. If all his squares are empty, he loses and the other player wins. There is no draw. Player A gets the top row and B gets the bottom row. A moves first, B next and so on. 
+                </div> 
+            </div>
+        </div>
+    </body>
+</html>
