@@ -1,5 +1,5 @@
 .block_title {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     margin-top: 32px;
 }
 
@@ -10,4 +10,8 @@ body {
 
 .btn-number {
     min-width: 32px;
+}
+
+#spinner_wrapper {
+    padding: 30px;
 }

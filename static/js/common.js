@@ -19,9 +19,9 @@ function generateTable(firstRowElements, secondRowElements, firstRowEnabled, sec
     return table;
 }
 
-function generateBlock(table, title, stylename) {
+function generateBlock(table, title, stylename, number) {
     var html = $('<div></div>');
-    html.append($('<div class="block_title"><span class="badge badge-' + stylename + '">' + title + '</span></div>'));
+    html.append($('<div class="block_title"><span class="badge badge-inverse" style="min-width: 24px; text-align: center;">' + number + '</span><span class="badge badge-' + stylename + '">' + title + '</span></div>'));
     html.append(table);
     return html;
 }

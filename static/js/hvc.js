@@ -1,4 +1,4 @@
-var first, second;
+var first, second, steps = 1;
 function init(size) {
     first=new Array(size);
     second=new Array(size);
@@ -8,13 +8,14 @@ function init(size) {
     }
     var table = generateTable(first, second, true, false)
     table.children().first().find(".btn").click(table_click_handler(first, second));
-    $('#battle_field').append(generateBlock(table, "Human", "info"));
+    $('#battle_field').append(generateBlock(table, "Human", "info", steps++));
 }
 
 function table_click_handler() {
     return function(e) {
         select($(e.currentTarget));
         $(e.currentTarget).parent().children('.btn').off().attr("disabled", true);
+        $('#battle_field').prepend(generateBlock($("<div id='spinner_wrapper'></div>").append(new Spinner().spin().el), "Computer", "default", steps))
         $.ajax("/ajax/hvcnext", {
             type: "post",
             data: JSON.stringify(move($(e.currentTarget).index())),
@@ -41,10 +42,13 @@ function move(selectedIndex) {
 function next_handler(response) {
     var tableComputer = generateTable(first, second, false, false);
     select(tableComputer.children().last().find(".btn")[response.selected_index])
-    $('#battle_field').prepend(generateBlock(tableComputer, "Computer", "important"));
+    $('#battle_field').children().first().remove();
+    $('#battle_field').prepend(generateBlock(tableComputer, "Computer", "important", steps++));
     first = response.current[0];
     second = response.current[1];
     var tableHuman = generateTable(first, second, true, false);
     tableHuman.children().first().find(".btn").click(table_click_handler(first, second));
-    $('#battle_field').prepend(generateBlock(tableHuman, "Human", "info"));
+    var block = generateBlock(tableHuman, "Human", "info", steps++).hide();
+    $('#battle_field').prepend(block);
+    block.show('slow')
 }
