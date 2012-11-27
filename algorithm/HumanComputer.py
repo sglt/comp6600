@@ -2,31 +2,36 @@ import pdb
 import sys
 from utils import Move, JustifyOver, printPebble
 from techniques import Alpha_Beta
-from nextstep import computer_next_step,Human_next_step
+from nextstep import computer_next_step
 #!/usr/bin/python
+#import logging
 
 
-def algorithm(input_n, d, currentlist):
-    
-    input_n = 3
+def HvsC(human, computer, Clever_Stupid):
+#    logger = logging.getLogger()
+#    handler=logging.FileHandler("Log_game_2.txt")
+#    logger.addHandler(handler)
+#    logger.setLevel(logging.NOTSET)
+        
     d = 5
+    input_n = len(human)
 
-    while input_n >= 2:
+    computer.reverse()
+    currentList = computer + human if Clever_Stupid == 'A' else human + computer
 
-        computer_next_step(input_n,d,input_n)
+    dict = computer_next_step(currentList,input_n,d,Clever_Stupid)
+    next_list = dict['list']
+    selected_index = len(next_list)/2 - 1 - dict['index']
+#    logger.debug("in algorithm current_list : %s",str(next_list))
+#    logger.debug("in algorithm selected_index : %s",str(selected_index))
 
-        print '-------------------Now it is B turn'
-        printPebble(game.RotateList)
-        if(JustifyOver(game.RotateList,input_n)):
-            break
+    computer = next_list[0:len(next_list) / 2]
+    human = next_list[len(next_list) / 2 : len(next_list)]
 
-        while 1:
-            action_b = input("Enter the action: ") #MiniMax_Decision(RotateList,'B');
-            action_b = int(action_b)
-            if game.change(action_b):
-                break
+    if Clever_Stupid == 'B':
+        human, computer = computer, human
+    
+    computer.reverse()
 
-        print '-------------------Now it is A turn'
-        printPebble(game.RotateList)
-        if(JustifyOver(game.RotateList,input_n)):
-            break
+
+    return [human, computer, selected_index]

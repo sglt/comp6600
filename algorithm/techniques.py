@@ -16,11 +16,11 @@ class Alpha_Beta:
     def __init__(self, input_n, d):
         self.input_n = input_n
         self.d = d
-        self.logger = logging.getLogger()
-        handler=logging.FileHandler("Log_game.txt")
-        self.logger.addHandler(handler)
-        self.logger.setLevel(logging.NOTSET)
-        self.logger.error("start logging")
+#        self.logger = logging.getLogger()
+#        handler=logging.FileHandler("Log_game.txt")
+#        self.logger.addHandler(handler)
+#        self.logger.setLevel(logging.NOTSET)
+#        self.logger.error("start logging")
 
         for x in range(input_n*2):
             self.RotateList.append(input_n)
@@ -68,13 +68,12 @@ class Alpha_Beta:
 
                 dict_ret = self.MIN_Value(RlistAction, alpha, beta, dictHash, chr(66-label_start), depth)
                 if(dict_ret['label1']==False):
-                    self.logger.debug('fail in MAX_value duplicate')
                     continue
-
+                
                 if max(v,dict_ret['label2']) > v:
                     v = dict_ret['label2']
                     index = start+i
-                    self.logger.debug("Trying to get a MAX_Value v:%d, index:%d, a:%d, b:%d", v, index, alpha, beta)
+
 
                 if v>=beta:
                     return {'label1':True, 'label2':v, 'label3':index}
@@ -116,11 +115,9 @@ class Alpha_Beta:
                 if(dict_ret['label1']==False):
                     continue
 
-
                 if min(v,dict_ret['label2']) < v:
                     v = dict_ret['label2']
                     index = start+i
-                    self.logger.debug("Trying to get a MIN_Value v:%d, index:%d, a:%d, b:%d", v, index, alpha, beta)
 
                 if v<=alpha:
                     return {'label1':True, 'label2':v, 'label3':index}
@@ -162,3 +159,4 @@ class Alpha_Beta:
 
     def re_construct_pebble(self, current_list):
         self.RotateList = current_list
+       # self.logger.debug("current_list : %s",str(current_list))

@@ -1,5 +1,9 @@
+<!DOCTYPE html>
+
 <html>
     <head>
+        <title>Human V.S. Computer</title>
+        
         <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
         
@@ -12,14 +16,26 @@
     </head>
     <body>
         <div class="container">
-            <h1>COMP6600 Artificial Intelligence Final Project</h1>
+        <div>
+            <h1>COMP6600 Artificial Intelligence Project</h1>
             <h4>
                 by <a href="http://auburn.edu/~lzt0006/">Liang Tang</a> and <a href="http://auburn.edu/~szg0031/">Song Gao</a> <br/>
                 Computer Science and Software Engineering, Auburn University
-                <a href="#modal_rules" role="button" class="btn btn-info pull-right" data-toggle="modal">Game Rules</a>
+                <a href="#modal_rules" role="button" class="btn btn-inverse pull-right" data-toggle="modal">Game Rules</a>
                 <a href="/" role="button" class="btn pull-right" data-toggle="modal">Home</a>
             </h4>
-            <h3>Human V.S. Computer</h3>
+            <h3>Human V.S. 
+                <div id="choose_computer" class="btn-group" style="margin-left: 8px;">
+                    <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+                        <span id="choose_computer_title">Artificial Intelligence</span>
+                        <span class="caret"></span> 
+                    </a>
+                    <ul class="dropdown-menu" id="choose_computer_menu">
+                        <li><a href="#">Artificial Stupidity</a></li>
+                        <li><a href="#">Artificial Intelligence</a></li>
+                    </ul>
+                </div>
+            </h3>
             
             <div class="modal fade" id="modal_choosesize" role="dialog" >
                 <div class="modal-header">

@@ -16,9 +16,15 @@ function table_click_handler() {
         select($(e.currentTarget));
         $(e.currentTarget).parent().children('.btn').off().attr("disabled", true);
         $('#battle_field').prepend(generateBlock($("<div id='spinner_wrapper'></div>").append(new Spinner().spin().el), "Computer", "default", steps))
+        move($(e.currentTarget).index());
+        data_to_send = {
+            "human": first,
+            "computer": second, 
+            "agent": $("#choose_computer_title").text(),
+        };
         $.ajax("/ajax/hvcnext", {
             type: "post",
-            data: JSON.stringify(move($(e.currentTarget).index())),
+            data: JSON.stringify(data_to_send),
             contentType:"application/json; charset=utf-8",
             dataType:"json",
             success: next_handler,
@@ -35,11 +41,11 @@ function move(selectedIndex) {
     }
     first = cat.slice(0, cat.length / 2);
     second = cat.slice(cat.length / 2, cat.length).reverse();
-    return [first, second]
 }
 
 
 function next_handler(response) {
+    console.log(response);
     var tableComputer = generateTable(first, second, false, false);
     select(tableComputer.children().last().find(".btn")[response.selected_index])
     $('#battle_field').children().first().remove();
@@ -52,3 +58,9 @@ function next_handler(response) {
     $('#battle_field').prepend(block);
     block.show('slow')
 }
+
+$(document).ready(function(){
+    $('#choose_computer_menu a').click(function(e){
+        $('#choose_computer_title').text($(e.currentTarget).text());
+    });
+})

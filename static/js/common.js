@@ -3,12 +3,12 @@ function generateTable(firstRowElements, secondRowElements, firstRowEnabled, sec
     var i;
     var firstRow = $('<div class="btn-group"></div>');
     for (i in firstRowElements) {
-        firstRow.append($("<div class='btn btn-primary btn-number'" + ((firstRowEnabled && firstRowElements[i] != 0) ? "" : " disabled") + ">" + firstRowElements[i] + "</div>"));
+        firstRow.append($("<div class='btn btn-large btn-primary btn-number'" + ((firstRowEnabled && firstRowElements[i] != 0) ? "" : " disabled") + ">" + firstRowElements[i] + "</div>"));
     }
     
     var secondRow = $('<div class="btn-group"></div>');
     for (i in secondRowElements) {
-        secondRow.append($("<div class='btn btn-danger btn-number'" + ((secondRowEnabled && secondRowElements[i] != 0) ? "" : " disabled") + ">" + secondRowElements[i] + "</div>"));
+        secondRow.append($("<div class='btn btn-large btn-danger btn-number'" + ((secondRowEnabled && secondRowElements[i] != 0) ? "" : " disabled") + ">" + secondRowElements[i] + "</div>"));
     }
     
     var table = $('<div></div>');
