@@ -6,7 +6,7 @@ from techniques import Alpha_Beta
 
 
 if __name__ == '__main__':
-    input_n = 3
+    input_n = 4
     d = 5
     game =Alpha_Beta(input_n,d)
 

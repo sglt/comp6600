@@ -16,6 +16,7 @@ class Alpha_Beta:
     def __init__(self, input_n, d):
         self.input_n = input_n
         self.d = d
+        self.let_who_win= 'B'
 #        self.logger = logging.getLogger()
 #        handler=logging.FileHandler("Log_game.txt")
 #        self.logger.addHandler(handler)
@@ -27,8 +28,9 @@ class Alpha_Beta:
             self.len_list = input_n*2
 
 
-    def Search(self, label):
-        dictHash = dict_hash(self.input_n, label)
+    def Search(self, Clever_Stupid, label):
+        dictHash = dict_hash(self.input_n, label, Clever_Stupid)
+        self.let_who_win= label
         dict_ret = self.MAX_Value(self.RotateList, self.NegativeExtreme, self.PositiveExtreme, dictHash, label,1)
         del dictHash
         if dict_ret['label1']:
@@ -51,7 +53,7 @@ class Alpha_Beta:
             label_start = 1
         start = label_start*half
         if self.Terminal_test(RList,depth):
-            winOrLose = dictHash.Utility(RList)
+            winOrLose = dictHash.Utility(RList, self.let_who_win)
             return {'label1':True, 'label2':winOrLose}
 
         v = self.NegativeExtreme
@@ -68,12 +70,13 @@ class Alpha_Beta:
 
                 dict_ret = self.MIN_Value(RlistAction, alpha, beta, dictHash, chr(66-label_start), depth)
                 if(dict_ret['label1']==False):
+                    self.logger.debug('fail in MAX_value duplicate')
                     continue
-                
+
                 if max(v,dict_ret['label2']) > v:
                     v = dict_ret['label2']
                     index = start+i
-
+#                    self.logger.debug("Trying to get a MAX_Value v:%d, index:%d, a:%d, b:%d", v, index, alpha, beta)
 
                 if v>=beta:
                     return {'label1':True, 'label2':v, 'label3':index}
@@ -98,7 +101,7 @@ class Alpha_Beta:
         start = label_start*half
 
         if self.Terminal_test(RList, depth):
-            winOrLose = dictHash.Utility(RList)
+            winOrLose = dictHash.Utility(RList, self.let_who_win)
             return {'label1':True, 'label2':winOrLose}
         v = self.PositiveExtreme
         dict_ret = {}
@@ -115,9 +118,11 @@ class Alpha_Beta:
                 if(dict_ret['label1']==False):
                     continue
 
+
                 if min(v,dict_ret['label2']) < v:
                     v = dict_ret['label2']
                     index = start+i
+#                    self.logger.debug("Trying to get a MIN_Value v:%d, index:%d, a:%d, b:%d", v, index, alpha, beta)
 
                 if v<=alpha:
                     return {'label1':True, 'label2':v, 'label3':index}
@@ -149,7 +154,6 @@ class Alpha_Beta:
                     i=0
                 else:
                     i = i+1
-
                 RoatateList[i] += 1
                 quantity -= 1
             return True
@@ -157,6 +161,15 @@ class Alpha_Beta:
             print 'The square you input doesnt have any squares'
             return False
 
-    def re_construct_pebble(self, current_list):
-        self.RotateList = current_list
-       # self.logger.debug("current_list : %s",str(current_list))
+
+    def re_construct_pebble(self, *kargs):
+        def constructFromTwo(self,A,B):
+            B.reverse()
+            self.RotateList = A+B
+        def constructFromOne(self, whole_list):
+            self.RotateList = whole_list
+        if len(kargs)==2:
+            return constructFromTwo(self, *kargs)
+        else:
+            return constructFromOne(self, *kargs)
+

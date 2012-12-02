@@ -33,9 +33,9 @@ def JustifyOver(RoatateList, input_n):
     for i in range(half):
         cal += RoatateList[i]
 
-    if(cal == 0):
+    if(cal == the_whole):
         print ';;;;;;A win;;;;;'
-    elif(cal == the_whole):
+    elif(cal == 0):
         print ';;;;;;B win;;;;;'
     else:
         return False

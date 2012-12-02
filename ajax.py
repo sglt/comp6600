@@ -5,8 +5,8 @@ import algorithm.HumanComputer
 import logging
 
 agents_mapping = {
-    "Artificial Stupidity": 'B',
-    "Artificial Intelligence": 'A',
+    "Artificial Stupidity": 'stupid',
+    "Artificial Intelligence": 'intelligent',
 }
 
 class HVCNextHandler(tornado.web.RequestHandler):

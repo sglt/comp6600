@@ -4,15 +4,15 @@
 from __future__ import division
 class dict_hash:
 
-    def __init__(self, input_n, label):
+    def __init__(self, input_n, label, Clever_Stupid):
         self.nValue = input_n
         self.the_whole = self.nValue*self.nValue*2
         self.Bidict=dict()
         self.Bidict={'A':{}, 'B':{}}
-        if label == 'A':
-            self.Utility = self.Utility_A
+        if Clever_Stupid == 'stupid':
+            self.Utility = self.Utility_stupid
         else:
-            self.Utility = self.Utility_B
+            self.Utility = self.Utility_intelligent
 
 
     def checkDuplicate(self, Rlist, label):
@@ -53,31 +53,49 @@ class dict_hash:
         for x in range(self.nValue):
             Index += Rlist[2*x]*Rlist[2*x+1]
             Index += Rlist[2*x]
-
         self.Bidict[label][Index].remove(Rlist)
 
-    def Utility_A(self, RList):
+    def Utility_intelligent(self, RList, let_who_win):
         cal = 0
         for i in range(self.nValue):
             cal += RList[i]
         if(cal==0):
-            return 1
+            if(let_who_win=='A'):
+                return 0
+            else:
+                return 1
         elif cal==self.the_whole:
-            return 0
+            if(let_who_win=='A'):
+                return 1
+            else:
+                return 0
         else:
-            return 1-cal/self.the_whole
+            if(let_who_win=='A'):
+                return cal/self.the_whole
+            else:
+                return 1-cal/self.the_whole
 
-    def Utility_B(self, RList):
+
+    def Utility_stupid(self, RList, let_who_win):
         cal = 0
         for i in range(self.nValue):
             cal += RList[i]
         if(cal==0):
-            return 1
+            if(let_who_win=='A'):
+                return 1
+            else:
+                return 0
         elif cal==self.the_whole:
-            return 0
+            if(let_who_win=='A'):
+                return 0
+            else:
+                return 1
         else:
-            return 1-cal/self.the_whole
+            if(let_who_win=='A'):
+                return 1-cal/self.the_whole
+            else:
+                return cal/self.the_whole
+
 
     def printDictHash(self):
-
         print self.Bidict

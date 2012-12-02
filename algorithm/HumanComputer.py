@@ -12,26 +12,17 @@ def HvsC(human, computer, Clever_Stupid):
 #    handler=logging.FileHandler("Log_game_2.txt")
 #    logger.addHandler(handler)
 #    logger.setLevel(logging.NOTSET)
-        
+
     d = 5
-    input_n = len(human)
-
-    computer.reverse()
-    currentList = computer + human if Clever_Stupid == 'A' else human + computer
-
-    dict = computer_next_step(currentList,input_n,d,Clever_Stupid)
+    who_s_turn = 'A'
+    dict = computer_next_step(human, computer, d, Clever_Stupid, who_s_turn)
     next_list = dict['list']
-    selected_index = len(next_list)/2 - 1 - dict['index']
-#    logger.debug("in algorithm current_list : %s",str(next_list))
-#    logger.debug("in algorithm selected_index : %s",str(selected_index))
-
-    computer = next_list[0:len(next_list) / 2]
-    human = next_list[len(next_list) / 2 : len(next_list)]
-
-    if Clever_Stupid == 'B':
-        human, computer = computer, human
-    
+    if who_s_turn=='B':
+        selected_index = len(next_list) - 1 - dict['index']
+    else:
+        selected_index = dict['index']
+    human = next_list[0:len(next_list) / 2]
+    computer = next_list[len(next_list) / 2 : len(next_list)]
     computer.reverse()
-
 
     return [human, computer, selected_index]
