@@ -70,6 +70,6 @@ $(document).ready(function(){
     });
     $('#btn_start').click(function(e){
          ask_computer();
-         e.currentTarget.off();
+         $(e.currentTarget).off().attr("disabled", true);
     });
 })
