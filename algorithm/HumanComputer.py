@@ -15,7 +15,7 @@ def HvsC(human, computer, Clever_Stupid):
 
     d = 5
     who_s_turn = 'A'
-    dict = computer_next_step(human, computer, d, Clever_Stupid, who_s_turn)
+    dict = computer_next_step(computer, human, d, Clever_Stupid, who_s_turn)
     next_list = dict['list']
     if who_s_turn=='B':
         selected_index = len(next_list) - 1 - dict['index']
@@ -25,4 +25,8 @@ def HvsC(human, computer, Clever_Stupid):
     computer = next_list[len(next_list) / 2 : len(next_list)]
     computer.reverse()
 
-    return [human, computer, selected_index]
+    return {
+        "human": human, 
+        "computer": computer,
+        "selected_index": selected_index
+        }

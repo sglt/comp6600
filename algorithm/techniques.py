@@ -16,7 +16,8 @@ class Alpha_Beta:
     def __init__(self, input_n, d):
         self.input_n = input_n
         self.d = d
-        self.let_who_win= 'B'
+        self.let_who_win= 'A'
+        self.RotateList =[]
 #        self.logger = logging.getLogger()
 #        handler=logging.FileHandler("Log_game.txt")
 #        self.logger.addHandler(handler)
@@ -44,7 +45,6 @@ class Alpha_Beta:
 
         dictHash.append(RList, label)
 
- #       print 'Max_value'
         half = self.len_list//2
         label_start = 0
         if label== 'A':
@@ -70,7 +70,7 @@ class Alpha_Beta:
 
                 dict_ret = self.MIN_Value(RlistAction, alpha, beta, dictHash, chr(66-label_start), depth)
                 if(dict_ret['label1']==False):
-                    self.logger.debug('fail in MAX_value duplicate')
+#                    self.logger.debug('fail in MAX_value duplicate')
                     continue
 
                 if max(v,dict_ret['label2']) > v:

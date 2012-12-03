@@ -15,11 +15,12 @@ class HVCNextHandler(tornado.web.RequestHandler):
         human = current["human"]
         computer = current["computer"]
         ret_Pebble = algorithm.HumanComputer.HvsC(human,computer, agents_mapping[current["agent"]])
-        human = ret_Pebble[0]
-        computer = ret_Pebble[1]
         response = {
-            "selected_index": ret_Pebble[2],
-            "current": [human, computer],
+            "selected_index": ret_Pebble["selected_index"],
+            "current": {
+                "human": ret_Pebble["human"],
+                "computer": ret_Pebble["computer"],
+                },
             "ret_Pebble_temp": ret_Pebble,
         }
         self.write(tornado.escape.json_encode(response))
