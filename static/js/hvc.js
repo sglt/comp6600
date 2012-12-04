@@ -35,8 +35,6 @@ function table_click_handler() {
 }
 
 function move(selectedIndex) {
-    console.log(computer)
-    console.log(human)
     var cat = computer.concat(human.reverse());
     var mapped_selectedIndex = computer.length + (human.length - selectedIndex - 1);
     var num_pebbles = cat[mapped_selectedIndex];
@@ -50,9 +48,8 @@ function move(selectedIndex) {
 
 
 function next_handler(response) {
-    console.log(response);
     var tableComputer = generateTable(computer, human, false, false);
-    select(tableComputer.children().first().find(".btn")[response.selected_index])
+    select(tableComputer.children().first().find(".btn")[response.selected_index]);
     $('#battle_field').children().first().remove();
     $('#battle_field').prepend(generateBlock(tableComputer, "Computer", "important", steps++));
     human = response.current["human"];

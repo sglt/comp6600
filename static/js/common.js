@@ -33,7 +33,7 @@ function select(target) {
 $(document).ready(function(){
     $('#btngroup_choosesize > .btn').click(function(e) {
         $('#modal_choosesize').modal("hide");
-        init(parseInt(e.currentTarget.innerText));
+        init(parseInt($(e.currentTarget).text()));
     });
     $('#modal_choosesize').modal({backdrop: 'static', keyboard: false});
 });
