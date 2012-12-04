@@ -55,7 +55,7 @@ function next_handler(response) {
     human = response.current["human"];
     computer = response.current["computer"];
     var tableHuman = generateTable(computer, human, false, true);
-    tableHuman.children().last().find(".btn").click(table_click_handler());
+    tableHuman.children().last().find(".btn").not("[disabled]").click(table_click_handler());
     var block = generateBlock(tableHuman, "Human", "info", steps++).hide();
     $('#battle_field').prepend(block);
     block.show('slow');
