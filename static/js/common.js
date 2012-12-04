@@ -27,7 +27,7 @@ function generateBlock(table, title, stylename, number) {
 }
 
 function select(target) {
-    $(target).removeClass("btn-primary btn-danger").addClass("btn-inverse");
+    $(target).removeClass("btn-primary btn-danger").addClass("");
 }
 
 $(document).ready(function(){

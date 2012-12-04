@@ -30,7 +30,7 @@ function table_click_handler() {
         select($(e.currentTarget));
         $(e.currentTarget).parent().children('.btn').off().attr("disabled", true);
         move($(e.currentTarget).index());
-        ask_computer();
+        game_over_or(ask_computer);
     };
 }
 
@@ -46,19 +46,54 @@ function move(selectedIndex) {
     human = cat.slice(cat.length / 2, cat.length).reverse();
 }
 
+function game_over_or(action) {
+    if(human_is_winning()) {
+            var tableComputer = generateTable(computer, human, false, false);
+            $('#battle_field').prepend(generateBlock(tableComputer, "War Eagle!", "success", steps++));
+        } else if(computer_is_winning()) {
+            var tableComputer = generateTable(computer, human, false, false);
+            $('#battle_field').prepend(generateBlock(tableComputer, "Oops...", "warning", steps++));
+        } else {
+            action();
+        }
+}
+
+function computer_is_winning() {
+    for(var i in human) {
+        if(human[i] != 0) {
+            console.log("human: " + human[i])
+            return false;
+        }
+    }
+    return true;
+}
+
+function human_is_winning() {
+    for(var i in computer) {
+        if(computer[i] !=0) {
+            console.log("computer: " + computer[i])
+            return false;
+        }
+    }
+    return true;
+}
 
 function next_handler(response) {
     var tableComputer = generateTable(computer, human, false, false);
     select(tableComputer.children().first().find(".btn")[response.selected_index]);
     $('#battle_field').children().first().remove();
     $('#battle_field').prepend(generateBlock(tableComputer, "Computer", "important", steps++));
+    
     human = response.current["human"];
     computer = response.current["computer"];
-    var tableHuman = generateTable(computer, human, false, true);
-    tableHuman.children().last().find(".btn").not("[disabled]").click(table_click_handler());
-    var block = generateBlock(tableHuman, "Human", "info", steps++).hide();
-    $('#battle_field').prepend(block);
-    block.show('slow');
+    
+    game_over_or(function(){
+        var tableHuman = generateTable(computer, human, false, true);
+        tableHuman.children().last().find(".btn").not("[disabled]").click(table_click_handler());
+        var block = generateBlock(tableHuman, "Human", "info", steps++).hide();
+        $('#battle_field').prepend(block);
+        block.show('slow');
+    });
 }
 
 $(document).ready(function(){
