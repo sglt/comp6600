@@ -4,7 +4,6 @@ import pdb
 import sys
 from hashDict import dict_hash
 from utils import Move
-import logging
 
 class Alpha_Beta:
 
