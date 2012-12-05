@@ -8,7 +8,7 @@ from nextstep import computer_next_step
 
 def CvsC(computer_A, computer_B, Clever_Stupid, who_s_turn):
 
-    d = 5
+    d = 3
 #    who_s_turn = 'A'
     dict = computer_next_step(computer_A, computer_B, d, Clever_Stupid, who_s_turn)
     next_list = dict['list']

@@ -55,6 +55,34 @@ class dict_hash:
             Index += Rlist[2*x]
         self.Bidict[label][Index].remove(Rlist)
 
+    def IntelligentUtility(self, RList, self_list):
+        cal = 0
+
+        if(self.nValue<=4):
+            half = self.nValue//2
+            for i in range(half-1):
+                cal += RList[i]
+            
+            for i in range(self.nValue):
+                cal += RList[i]*(self.nValue-i)/self.nValue
+            ret_result = (self.the_whole-cal)/self.the_whole
+
+            if ret_result<0:
+                return 0
+            else:
+                return ret_result
+            
+        else:
+            for i in range(self.nValue):
+                cal += self_list[i]*(self.nValue-i)/self.nValue
+     
+            for i in range(self.nValue):
+                cal += RList[i]*(i+1)/self.nValue
+            
+            ret_result = cal/self.the_whole
+            return ret_result
+
+
     def Utility_intelligent(self, RList, let_who_win):
         cal = 0
         for i in range(self.nValue):
@@ -71,9 +99,15 @@ class dict_hash:
                 return 0
         else:
             if(let_who_win=='A'):
-                return cal/self.the_whole
+                List_B= RList[self.nValue:]
+                self_list = list()
+                self_list = RList[:self.nValue]
+                return self.IntelligentUtility(List_B, self_list)
             else:
-                return 1-cal/self.the_whole
+                List_A= RList[:self.nValue]
+                self_list = list()
+                self_list = RList[self.nValue:]
+                return self.IntelligentUtility(List_A, self_list)
 
 
     def Utility_stupid(self, RList, let_who_win):
@@ -82,19 +116,19 @@ class dict_hash:
             cal += RList[i]
         if(cal==0):
             if(let_who_win=='A'):
-                return 1
-            else:
                 return 0
+            else:
+                return 1
         elif cal==self.the_whole:
             if(let_who_win=='A'):
-                return 0
-            else:
                 return 1
+            else:
+                return 0
         else:
             if(let_who_win=='A'):
-                return 1-cal/self.the_whole
-            else:
                 return cal/self.the_whole
+            else:
+                return 1-cal/self.the_whole
 
 
     def printDictHash(self):
