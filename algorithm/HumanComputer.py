@@ -9,7 +9,7 @@ from nextstep import computer_next_step
 
 def HvsC(human, computer, Clever_Stupid):
 
-    d = 5
+    d = 3
     who_s_turn = 'A'
     dict = computer_next_step(computer, human, d, Clever_Stupid, who_s_turn)
     next_list = dict['list']
