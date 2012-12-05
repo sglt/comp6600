@@ -14,15 +14,16 @@ function whos_turn() {
     return (steps % 2 == 1 ? "A" : "B");
 }
 var badge_styles = ["important", "info"];
+var alias = {"A": "Artificial Stupidity", "B": "Artificial Intelligence", }
 
 function game_over_or(action) {
     //if(steps >= 5) return;
     if(first_is_winning()) {
             var table = generateTable(first, second, false, false);
-            $('#battle_field').prepend(generateBlock(table, "A Wins!", "success", steps++));
+            $('#battle_field').prepend(generateBlock(table, alias["A"] + " Wins!", "success", steps++));
     } else if(second_is_winning()) {
         var table = generateTable(first, second, false, false);
-        $('#battle_field').prepend(generateBlock(table, "B Wins!", "warning", steps++));
+        $('#battle_field').prepend(generateBlock(table, alias["B"] + " Wins!", "warning", steps++));
     } else {
         action();
     }
@@ -50,11 +51,11 @@ function next(response) {
     if(response) {
         console.log(response);
         $('#battle_field').children().first().remove();
-        var table = generateTable(response.current.A, response.current.B, false, false);
+        var table = generateTable(first, second, false, false);
         console.log(steps);
         console.log($(table.children()[(steps - 1) % 2]));
         select($(table.children(".btn-group")[(steps - 1) % 2]).find(".btn")[response.selected_index]);
-        var block = generateBlock(table, whos_turn(), badge_styles[(steps - 1) % 2], steps).hide();
+        var block = generateBlock(table, alias[whos_turn()], badge_styles[(steps - 1) % 2], steps).hide();
         steps++;
         $('#battle_field').prepend(block);
         block.show('slow');
