@@ -24,3 +24,17 @@ class HVCNextHandler(tornado.web.RequestHandler):
             "ret_Pebble_temp": ret_Pebble,
         }
         self.write(tornado.escape.json_encode(response))
+        
+class CVCNextHandler(tornado.web.RequestHandler):
+    def post(self):
+        current = tornado.escape.json_decode(self.request.body)
+        response = {
+            "selected_index": 0,
+            "current": {
+                "A": current["A"],
+                "B": current["B"],
+            },
+            "ret_Pebble_temp": None,
+            "previous": current,
+        }
+        self.write(tornado.escape.json_encode(response))

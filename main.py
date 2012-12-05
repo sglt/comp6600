@@ -8,6 +8,7 @@ application = tornado.web.Application([
     (r"/", tornado.web.RedirectHandler, {"url": "/static/index.html"}),
     (r"/static/(.*)", tornado.web.StaticFileHandler, {"path": "static"}),
     (r"/ajax/hvcnext", ajax.HVCNextHandler),
+    (r"/ajax/cvcnext", ajax.CVCNextHandler),
     ("/(favicon.ico)", tornado.web.StaticFileHandler, {'path': "static"}),
 ])
 

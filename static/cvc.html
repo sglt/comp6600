@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Computer V.S. Computer</title>
+        
+        <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+        
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/spin.min.js"></script>
+        
+        <script src="js/common.js"></script>
+        <script src="js/cvc.js"></script>
+    </head>
+    <body>
+        <div class="container">
+        <div>
+            <h1>COMP6600 Artificial Intelligence Project</h1>
+            <h4>
+                by <a href="http://auburn.edu/~lzt0006/">Liang Tang</a> and <a href="http://auburn.edu/~szg0031/">Song Gao</a> <br/>
+                Computer Science and Software Engineering, Auburn University
+                <a href="#modal_rules" role="button" class="btn btn-inverse pull-right" data-toggle="modal">Game Rules</a>
+                <a href="/" role="button" class="btn pull-right" data-toggle="modal">Home</a>
+            </h4>
+            <h3>Artificial Stupidity V.S. Artificial Intelligence</h3>
+            
+            <div class="modal fade" id="modal_choosesize" role="dialog" >
+                <div class="modal-header">
+                    <h3>Select size to start a game</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="btn-group" id="btngroup_choosesize">
+                        <a class="btn">2</a>
+                        <a class="btn">3</a>
+                        <a class="btn">4</a>
+                        <a class="btn">5</a>
+                        <a class="btn">6</a>
+                        <a class="btn">7</a>
+                        <a class="btn">8</a>
+                        <a class="btn">9</a>
+                        <a class="btn">10</a>
+                    </div>                
+                </div> 
+            </div>
+    
+            <hr/>
+            <div id="battle_field">
+               
+            </div>
+            <div class="modal hide fade" id="modal_rules" role="dialog" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Game Rules</h3>
+                </div>
+                <div class="modal-body">
+                    <p>There are two players: A (1st row) and B (2nd row).</p>
+                    <p>Each player gets a row of <i>n</i> squares with <i>n</i> pebbles in each. </p>
+                    <p>A move by a player involves picking up all pebbles in one of his squares and distributing 
+                    them clockwise by dropping one pebble into each square starting with the next square in the 
+                    clockwise direction (pebbles are dropped into his and opponent's squares) until all pebbles 
+                    have been dropped. </p>
+                    <p>A player has to make a move if he has at least one non-empty square. If all his squares are 
+                    empty, he loses and the other player wins. </p>
+                    <p>There is no draw. Player A gets the top row and B gets the bottom row. A moves first, B next 
+                    and so on. </p>
+                </div> 
+            </div>
+        </div>
+    </body>
+</html>

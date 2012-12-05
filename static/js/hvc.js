@@ -61,7 +61,6 @@ function game_over_or(action) {
 function computer_is_winning() {
     for(var i in human) {
         if(human[i] != 0) {
-            console.log("human: " + human[i])
             return false;
         }
     }
@@ -71,7 +70,6 @@ function computer_is_winning() {
 function human_is_winning() {
     for(var i in computer) {
         if(computer[i] !=0) {
-            console.log("computer: " + computer[i])
             return false;
         }
     }
