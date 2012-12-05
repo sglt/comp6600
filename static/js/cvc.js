@@ -16,7 +16,7 @@ function whos_turn() {
 var badge_styles = ["important", "info"];
 
 function game_over_or(action) {
-    if(steps >= 5) return;
+    //if(steps >= 5) return;
     if(first_is_winning()) {
             var table = generateTable(first, second, false, false);
             $('#battle_field').prepend(generateBlock(table, "A Wins!", "success", steps++));
