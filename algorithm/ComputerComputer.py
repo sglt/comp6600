@@ -2,31 +2,28 @@ import pdb
 import sys
 from utils import Move, JustifyOver, printPebble
 from techniques import Alpha_Beta
+from nextstep import computer_next_step
 #!/usr/bin/python
 
 
-if __name__ == '__main__':
-    input_n = 4
+def CvsC(computer_A, computer_B, Clever_Stupid, who_s_turn):
+
     d = 5
-    game =Alpha_Beta(input_n,d)
+#    who_s_turn = 'A'
+    dict = computer_next_step(computer_A, computer_B, d, Clever_Stupid, who_s_turn)
+    next_list = dict['list']
+    
+    if who_s_turn=='B':
+        selected_index = len(next_list) - 1 - dict['index']
+    else:
+        selected_index = dict['index']
+    
+    computer_A = next_list[0:len(next_list) / 2]
+    computer_B = next_list[len(next_list) / 2 : len(next_list)]
+    computer_B.reverse()
 
-    while input_n >= 2:
-
-        action_a = game.Search('A');
-        if(action_a <0): print 'it can not get any actions'
-        print 'action_a = ', action_a
-        game.change(action_a);
-
-        print '-------------------Now it is B turn'
-        printPebble(game.RotateList)
-        if(JustifyOver(game.RotateList,input_n)):
-            break
-
-
-        action_b = game.Search('B')
-        game.change(action_b)
-        print 'action_b = ', action_b
-        print '-------------------Now it is A turn'
-        printPebble(game.RotateList)
-        if(JustifyOver(game.RotateList,input_n)):
-            break
+    return {
+        "computer_B": computer_B, 
+        "computer_A": computer_A,
+        "selected_index": selected_index
+        }
